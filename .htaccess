@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !index\.php$
+    RewriteCond %{REQUEST_FILENAME} !-f
+	#RewriteCond %{REQUEST_METHOD} OPTIONS
+	#RewriteRule ^(.*)$ $1 [R=200,L,E=HTTP_ORIGIN:%{HTTP:ORIGIN}]]
+    RewriteRule .* index.php [L,QSA]
+</IfModule>
+
+##
+## Added to prevent site from being indexed 
+## - see email from Jeff Nickel 2012.12.19
+##
+<IfModule mod_headers.c>
+Header always set Access-Control-Allow-Origin "*"
+Header always set Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
+Header always set Access-Control-Max-Age "1000"
+Header always set Access-Control-Allow-Headers "x-requested-with, Content-Type, origin, authorization, accept, client-security-token, source-appl-id"
+</IfModule>
